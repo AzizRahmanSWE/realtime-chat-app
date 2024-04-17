@@ -3,9 +3,9 @@ import type { JWT } from "next-auth/jwt";
 
 type UserId = string; // alt to interface
 
-declare module "next-auth/jwt" {
+declare module 'next-auth/jwt' {
   interface JWT {
-    id: UserId;
+    id: UserId
   }
 }
 

@@ -23,7 +23,7 @@ function getGoogleCrednetials() {
 export const authOptions: NextAuthOptions = {
   adapter: UpstashRedisAdapter(db),
   session: {
-    strategy: "jwt",
+    strategy: 'jwt',
   },
   pages:{
     signIn: '/login'

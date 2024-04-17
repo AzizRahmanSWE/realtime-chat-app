@@ -13,20 +13,20 @@ export async function POST(req: Request) {
     const { email: emailToAdd } = addFriendValidator.parse(body.email); // validate the email
 
     const idToAdd = (await fetchRedis(
-      "get",
+      'get',
       `user:email:${emailToAdd}`
     )) as string;    
-    
-    if(!idToAdd) {
+  
+    if (!idToAdd) {
       return new Response("This user does not exit.", { status: 404 });
     }
     const session = await getServerSession(authOptions)
 
-    if(!session) {
+    if (!session) {
       return new Response("Unauthorized", { status: 401 });
     }
 
-    if(idToAdd === session.user.id) {
+    if (idToAdd === session.user.id) {
       return new Response("You can't add yourself.", { status: 400 });
     }
 
@@ -37,7 +37,7 @@ export async function POST(req: Request) {
       session.user.id
     )) as 0 | 1;
 
-    if(isAlreadyAdded) {
+    if (isAlreadyAdded) {
       return new Response("User already added.", { status: 400 });
     }
 
@@ -48,7 +48,7 @@ export async function POST(req: Request) {
       idToAdd
     )) as 0 | 1;
 
-    if(isAlreadyFriends) {
+    if (isAlreadyFriends) {
       return new Response("User already added.", { status: 400 });
     }
     // validate request, send friend requset
